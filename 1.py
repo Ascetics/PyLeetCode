@@ -19,7 +19,7 @@ class Solution:
 
     def twoSum(self, nums, target):
         """
-        用dict模拟hashmap方法
+        用dict模拟hashmap方法，改进
         :param nums:
         :param target:
         :return:
@@ -31,8 +31,8 @@ class Solution:
         # 由于上面使用了dic，数值相同，那么dic只会记录下标最大的那个
         # 所以，遍历的时候，只能从nums遍历，不能从dic遍历，否则会漏掉类似6=3+3的情况
         for index_i, i in enumerate(nums):
-            target_j = target - i
-            index_j = dic.get(target_j)
+            j = target - i
+            index_j = dic.get(j)
             if index_j is not None and index_j != index_i:
                 return [index_i, index_j]
 
