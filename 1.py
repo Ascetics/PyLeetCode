@@ -20,21 +20,18 @@ class Solution:
     def twoSum(self, nums, target):
         """
         用dict模拟hashmap方法，改进
+        不用先遍历加入dict，而是每遇到一个加入到dict
         :param nums:
         :param target:
         :return:
         """
         dic = {}
-        for index, n in enumerate(nums):
-            dic[n] = index
-            pass
-        # 由于上面使用了dic，数值相同，那么dic只会记录下标最大的那个
-        # 所以，遍历的时候，只能从nums遍历，不能从dic遍历，否则会漏掉类似6=3+3的情况
         for index_i, i in enumerate(nums):
             j = target - i
             index_j = dic.get(j)
             if index_j is not None and index_j != index_i:
                 return [index_i, index_j]
+            dic[i] = index_i
 
     pass
 
