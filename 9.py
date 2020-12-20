@@ -32,11 +32,9 @@ class Solution:
     def isPalindrome(self, x: int) -> bool:
         if x < 0:
             return False
-        rev = 0
-        n = x
+        rev, n = 0, x
         while n > 0:
-            rev = rev * 10 + n % 10
-            n //= 10
+            rev, n = rev * 10 + n % 10, n // 10
         return rev == x
 
 
