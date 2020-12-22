@@ -42,21 +42,30 @@ class TreeNode:
 class Solution:
 
     def zigzagLevelOrder(self, root: TreeNode):
+        """
+        特判，如果root为空，那么返回[]
+        root进入队列q，下一层队列q_sub和结果r都为[]，方向最初是向右
+        反向遍历q,相当于队列出队，进入r。
+        判断方向向右，先加左再加右。得到本层结果r和下一层队列的反向q_sub
+        更新队列q和方向进入下一层。
+        上一层得到的是反向的队列，反向遍历顺序还是对的。（第一层因为只有1个node，所以正反一样）
+        判断方向向左，先加右再加左。
+        周而复始，直到队列q为空。        
+        """
         if not root: return []
         q, right, res = [root], True, []
         while len(q) > 0:
             q_sub, r = [], []
-            for i in range(len(q) - 1, -1, -1):
-                r.append(q[i].val)
+            for n in reversed(q):
+                r.append(n.val)
                 if right:
-                    if q[i].left: q_sub.append(q[i].left)
-                    if q[i].right: q_sub.append(q[i].right)
+                    if n.left: q_sub.append(n.left)
+                    if n.right: q_sub.append(n.right)
                 else:
-                    if q[i].right: q_sub.append(q[i].right)
-                    if q[i].left: q_sub.append(q[i].left)
-            if len(r) > 0:res.append(r)
-            q = q_sub
-            right = not right
+                    if n.right: q_sub.append(n.right)
+                    if n.left: q_sub.append(n.left)
+            if len(r) > 0: res.append(r)
+            q, right = q_sub, not right
         return res
         
         
